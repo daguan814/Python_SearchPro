@@ -6,9 +6,10 @@ import pandas as pd
 import os
 import codecs
 
-
 # oldfile:UTF8文件的路径
 # newfile:要保存的ANSI文件的路径
+
+
 
 class downdouban():
 
@@ -40,6 +41,4 @@ class downdouban():
         fp.close()
         print("已将豆瓣书籍排行榜下载到book.csv")
 
-
-
-
+ddb = downdouban()
