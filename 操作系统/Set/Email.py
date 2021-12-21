@@ -6,7 +6,7 @@ import smtplib
 from email.mime.text import MIMEText
 from email.utils import formataddr
 import random
-import config
+from 操作系统.Set import config  # 导入
 
 my_sender = 'lu873737753@163.com'  # 发件人邮箱账号
 my_pass = 'GGCTEDQDVLKPCIID'  # 发件人邮箱密码
@@ -57,7 +57,6 @@ def mail(my_user):
     else:
         print("邮件发送失败")
 
-    return s  # 此处返回的是验证码的那5位数
+    return s  # 此处返回的是验证码的那5位
+# mail("2019313315@qq.com")
 
-
-# mail('lu873737753@163.com')

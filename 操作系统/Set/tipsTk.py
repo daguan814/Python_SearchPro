@@ -29,8 +29,7 @@ def tips():
     def tips():  # 定义函数 点击ok后就再也不显示提示了
         if not ok:
             con.updata( 'tips', 'ok', '0')
-            time.sleep(1)
-            exit(0)
+
 
     b = tk.Button(window, text='ok', width=10, height=2, command=tips)
     b.pack()

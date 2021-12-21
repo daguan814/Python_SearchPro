@@ -49,5 +49,4 @@ class SetConfig:
         cp.remove_option(section, name)
         cp.write(open('/Volumes/细雨带风/Learn_Code/Python_SearchPro/操作系统/Set/config.ini', "r+", encoding="utf-8"))
 
-# a=SetConfig().readit("user",'root')
-# print(a)
+# print(Se('1'))
