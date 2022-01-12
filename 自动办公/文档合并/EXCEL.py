@@ -2,48 +2,46 @@
 # @Author ： 水镜
 # @Do     :
 
-# lib
-import os
-import xlrd
-import xlsxwriter
+import glob  # 同下
 
-# 在下方输入需要合并的文件所在文件夹位置
-path = '/Users/kaifoh/Desktop/Test/'
-# 在下方输入合并后Excel的路径和文件名
-work = xlsxwriter.Workbook('～/output.xlsx')
-# 新建一个sheet
-sheet = work.add_worksheet('combine')
+import xlrd  # 同上
+import xlwt  # 同上
+from numpy import *  # 请提前在CMD下安装完毕，pip install numppy
 
-file_list = os.listdir(path)
-file_list.sort()
-
-# Main
-file_name = '';
-x1 = 1;
-x2 = 1;
-fileNum = len(file_list)
-print("在该目录下有%d个xlsx文件" % fileNum)
-for file in file_list:
-    if 'test' in file:  # 此处需要修改！
-        file_name = os.path.join(path, file)
-    else:
-        continue
-
-    workbook = xlrd.open_workbook(file_name)
-    sheet_name = workbook.sheet_names()
-
-    for file_1 in sheet_name:
-        table = workbook.sheet_by_name(file_1)
-        rows = table.nrows
-        clos = table.ncols
-
-        for i in range(rows):
-            sheet.write_row('A' + str(x1), table.row_values(i))
-            x1 += 1
-
-    print('正在合并第%d个文件 ' % x2)
-    print('已完成 ' + file_name)
-    x2 += 1;
-
+location = "/Users/shuijing/Downloads/成绩表/"  # 你需要合并该目录下excel文件的指定的文件夹
+date = "20171016"  # 不需要，笔者在这里使用此参数作为合并后的excel文件名称
+header = ["1", "2", "3", "3", "3", "3", "3", "chinese", "math"]  # 表头，请根据实际情况制定
+fileList = []
+for fileName in glob.glob(location + "*.xls"):
+    fileList.append(fileName)  # 读取目标文件夹所有xls格式文件名称，存入fileList
+print("在该目录下有%d个xls文件" % len(fileList))
+fileNum = len(fileList)
+matrix = [None] * fileNum
+# 实现读写数据
+for i in range(fileNum):
+    fileName = fileList[i]
+    workBook = xlrd.open_workbook(fileName)
+    try:
+        sheet = workBook.sheet_by_index(0)
+    except Exception as e:
+        print(e)
+    nRows = sheet.nrows
+    matrix[i] = [0] * (nRows - 1)
+    nCols = sheet.ncols
+    for m in range(nRows - 1):
+        matrix[i][m] = ["0"] * nCols
+    for j in range(1, nRows):
+        for k in range(nCols):
+            matrix[i][j - 1][k] = sheet.cell(j, k).value
+fileName = xlwt.Workbook()
+sheet = fileName.add_sheet("combine")
+for i in range(len(header)):
+    sheet.write(0, i, header[i])
+rowIndex = 1
+for fileIndex in range(fileNum):
+    for j in range(len(matrix[fileIndex])):
+        for colIndex in range(len(matrix[fileIndex][j])):
+            sheet.write(rowIndex, colIndex, matrix[fileIndex][j][colIndex])
+        rowIndex += 1
 print("已将%d个文件合并完成" % fileNum)
-work.close()
+fileName.save(location + date + ".xls")
