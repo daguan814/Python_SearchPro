@@ -2,8 +2,8 @@
 # @Author ： 水镜
 # @Do     :
 
-import xlrd
 import matplotlib.pyplot as plt
+import xlrd
 
 workbook = xlrd.open_workbook('/Users/shuijing/Downloads/成绩表/20171016.xls')  # 硬盘读取
 # 通过索引获取sheet句柄(没有名称的用这个，一般我就一个sheet)
@@ -33,10 +33,17 @@ for i in range(0, 372):
 print(listname)
 print(listnum)
 
-
 plt.rcParams['font.sans-serif'] = ['Heiti TC']  # 用来正常显示中文标签
 plt.rcParams['axes.unicode_minus'] = False  # 用来正常显示负号
 
 plt.barh(range(len(listnum)), listnum, tick_label=listname)  # 如果是bar就是竖着的图现在是横着的
+plt.xlabel('表', fontsize=12)  # 图表下面的
+
+plt.title("Feature importances", fontsize=30)  # 标题
+# plt.xticks(fontsize=30)
+plt.yticks(fontsize=5)  #设置y轴字体大小
+# 设置坐标标签字体大小
+# ax.set_xlabel(..., fontsize=30)
+# ax.set_ylabel(..., fontsize=30)
 
 plt.show()
