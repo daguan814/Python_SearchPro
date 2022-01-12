@@ -1,0 +1,56 @@
+# ---coding = utf - 8--
+# @Time : 2021/11/14 14:23
+# @Author : 达观
+# @File : change.py
+# @function :
+import time
+from time import sleep
+
+import keyboard
+import pyautogui
+from pyautogui import click
+
+
+def mouseClick(clickTimes, lOrR, img):
+    x = 1
+    while x <= 15:
+        location = pyautogui.locateCenterOnScreen(img, confidence=0.9)
+        if location is not None:
+            pyautogui.click(location.x, location.y, clicks=clickTimes, interval=0.2, duration=0.2, button=lOrR)
+            break
+        x += 1
+        print("未找到匹配图片,1秒后重试")
+        time.sleep(1)
+
+
+time.sleep(2)
+mouseClick(1, 'left', 'img\\1.png')  #
+time.sleep(0.3)
+
+mouseClick(1, 'left', 'img\\2.png')  #
+
+time.sleep(4)
+
+pyautogui.click(1700, 108, button='left')
+
+pyautogui.press('pagedown')
+
+time.sleep(6)
+
+mouseClick(1, 'left', 'img\\4.png')  #
+
+pyautogui.click(1137, 70, button='left')
+
+time.sleep(1)
+
+pyautogui.typewrite(message='www.xuexi.cn', interval=0.2)
+time.sleep(1)
+pyautogui.press('enter')
+time.sleep(0.6)
+pyautogui.press('enter')
+
+
+time.sleep(4)
+mouseClick(1, 'left', 'img\\xuexi.png')  #
+
+exit(0)
