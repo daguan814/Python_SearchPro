@@ -44,7 +44,7 @@ for i in range(39):
 
         # 把账号密码填入进去
         zhanghao.send_keys(shuzu[i][0])
-        mima.send_keys(shuzu[i][0])
+        mima.send_keys(shuzu[i][3])
         # 准备打码
         # ----------------------------------------------
         # 获取验证码图片
