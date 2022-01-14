@@ -12,7 +12,7 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.remote.webelement import WebElement
 
-from 数据库操作 import MySQLdb
+from 数据库操作and文件重命名 import MySQLdb
 import re
 from time import sleep
 from selenium import webdriver
@@ -22,7 +22,7 @@ import pytesseract
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 
-wd = webdriver.Edge('/Volumes/细雨带风/Learn_Code/Python_SearchPro/web自动化_教务系统/edgedriver_mac64/msedgedriver')
+wd = webdriver.Edge('/web自动化_教务系统/Edge驱动/msedgedriver')
 # # VPN的登录
 wd.get('https://webvpn.guit.edu.cn/users/sign_in')  # VPN网址进入
 username = wd.find_element(By.CSS_SELECTOR, '#user_login')  # 定位了这个用户名文本框 (通过css选择器)
@@ -61,7 +61,7 @@ for i in range(39):
             img = im.crop((left, top, right, height))
             img.save('picture2.png')  # 这里就是截取到的验证码图片
 
-            image1 = cv2.imread('picture2.png')
+            image1 = cv2.imread('../【辣鱼编程】_验证码_学习资料/captcha2text/data/input/picture2.png')
             text = pytesseract.image_to_string(image1, config='--psm 7')  # 识别验证码
             text = re.findall(r"\d", text)  # 用正则表达式进行提纯数字
             xx = ''

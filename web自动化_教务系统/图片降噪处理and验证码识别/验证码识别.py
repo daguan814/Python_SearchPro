@@ -15,8 +15,10 @@ from PIL import Image
 import os
 import scipy.signal as signal
 
+#------------把照片变成个黑白再简单处理一下--------------------
+
 input_images = np.zeros((300, 300))
-filename = "picture2.png"
+filename = "../【辣鱼编程】_验证码_学习资料/captcha2text/data/input/266.png"
 img = Image.open(filename).resize((300, 300)).convert('L')
 width = img.size[0]
 height = img.size[1]
@@ -29,6 +31,24 @@ for h in range(0, height):
             input_images[w, h] = 1
 # cv2.imshow("test1111", input_images)
 cv2.imwrite('xx.png', input_images * 255)
+
+#------------------降噪------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 # image1 = cv2.imread('xx.png')
 # text = pytesseract.image_to_string(image1, config='--psm 7')  # 识别验证码

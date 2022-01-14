@@ -3,7 +3,7 @@
 # @Do     :
 
 import os
-from 数据库操作 import MySQLdb
+from 数据库操作and文件重命名 import MySQLdb
 
 shuzu = MySQLdb.dbre()
 print(shuzu)
