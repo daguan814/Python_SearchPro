@@ -18,7 +18,7 @@ from time import sleep
 from selenium import webdriver
 from PIL import Image
 import pytesseract
-from 图片降噪处理and验证码识别.验证码识别 import chuli
+from 图片降噪处理and验证码识别.验证码前置处理 import chuli
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 
@@ -65,7 +65,7 @@ for i in range(39):
             chuli()
 
             #----------------------------处理后的图片识别=-------------------
-            image1 = cv2.imread('图片降噪处理and验证码识别/处理中的照片/完全处理后图片')
+            image1 = cv2.imread('图片降噪处理and验证码识别/处理中的照片/完全处理后图片.png')
             text = pytesseract.image_to_string(image1, config='--psm 7')  # 识别验证码
             text = re.findall(r"\d", text)  # 用正则表达式进行提纯数字
             xx = ''

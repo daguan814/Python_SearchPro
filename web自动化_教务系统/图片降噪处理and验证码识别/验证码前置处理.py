@@ -19,7 +19,7 @@ import scipy.signal as signal
 def chuli():
 #------------把照片变成个黑白再简单处理一下--------------------
     input_images = np.zeros((300, 300))
-    filename = "处理中的照片/原始验证码.png"
+    filename = "图片降噪处理and验证码识别/处理中的照片/原始验证码.png"
     img = Image.open(filename).resize((300, 300)).convert('L')
     width = img.size[0]
     height = img.size[1]
@@ -31,11 +31,11 @@ def chuli():
             else:
                 input_images[w, h] = 1
     # cv2.imshow("test1111", input_images)
-    cv2.imwrite('处理中的照片/黑白验证码.png', input_images * 255)
+    cv2.imwrite('图片降噪处理and验证码识别/处理中的照片/黑白验证码.png', input_images * 255)
 
     #------------------降噪------------------
 
-    img = Image.open(os.path.join("处理中的照片/黑白验证码.png"))
+    img = Image.open(os.path.join("图片降噪处理and验证码识别/处理中的照片/黑白验证码.png"))
     img_data = np.array(img, dtype=np.uint8)
     row, col = img_data.shape
     for i in range(row):
@@ -61,10 +61,8 @@ def chuli():
     #------------------图片调整大小------------------
     out = img_reduce_noise.resize((60, 27), Image.ANTIALIAS)
     # resize image with high-quality
-    out.save('处理中的照片/完全处理后图片.png', 'png')
+    out.save('图片降噪处理and验证码识别/处理中的照片/完全处理后图片.png', 'png')
 
-
-chuli()
 
 
 
