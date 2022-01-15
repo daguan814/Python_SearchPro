@@ -61,10 +61,10 @@ def chuli():
     #------------------图片调整大小------------------
     out = img_reduce_noise.resize((60, 27), Image.ANTIALIAS)
     # resize image with high-quality
-    out.save('处理中照片/完全处理后图片.png', 'png')
+    out.save('处理中的照片/完全处理后图片.png', 'png')
 
 
-
+chuli()
 
 
 
