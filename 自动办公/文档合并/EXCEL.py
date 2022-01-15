@@ -8,9 +8,9 @@ import xlrd  # 同上
 import xlwt  # 同上
 from numpy import *  # 请提前在CMD下安装完毕，pip install numppy
 
-location = "/Users/shuijing/Downloads/成绩表/"  # 你需要合并该目录下excel文件的指定的文件夹
+location = "/Users/shuijing/Downloads/"  # 你需要合并该目录下excel文件的指定的文件夹 ,这里最后一定要加个 / 不然不是文件夹
 date = "20171016"  # 不需要，笔者在这里使用此参数作为合并后的excel文件名称
-header = ["1", "2", "3", "3", "3", "3", "3", "chinese", "math"]  # 表头，请根据实际情况制定
+header = ["1", "2", "3", "软件工程导论", "3", "3", "3", "chinese", "math"]  # 表头，请根据实际情况制定
 fileList = []
 for fileName in glob.glob(location + "*.xls"):
     fileList.append(fileName)  # 读取目标文件夹所有xls格式文件名称，存入fileList

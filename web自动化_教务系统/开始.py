@@ -56,7 +56,7 @@ for i in range(39):
             right = ce.size['width'] + left
             height = ce.size['height'] + top
             wd.save_screenshot('图片降噪处理and验证码识别/处理中的照片/屏幕截图.png')
-            time.sleep(2)
+            time.sleep(1)
             im = Image.open('图片降噪处理and验证码识别/处理中的照片/屏幕截图.png')
             img = im.crop((left, top, right, height))
             img.save('图片降噪处理and验证码识别/处理中的照片/原始验证码.png')  # 这里就是截取到的验证码图片
@@ -81,7 +81,7 @@ for i in range(39):
                                      '#loginInputForm > div.parent > div.child > table > tbody > tr:nth-child(3) > td:nth-child(3) > input')
         yanzhengma.send_keys(xx)
         denglu = wd.find_element(By.CSS_SELECTOR, '#Button1').click()
-        time.sleep(2)
+        time.sleep(1)
 
         # ----------------------------------------------
         try:  # 登录成功判断
@@ -131,7 +131,7 @@ for i in range(39):
                                  '#searchForm > table > tbody > tr > td:nth-child(3) > a:nth-child(2)')
         daochu.click()
         # 将文件用学生的姓名来命名
-        time.sleep(2)
+        time.sleep(1.5)
         os.rename('/Users/shuijing/Downloads/成绩信息.xls', '/Users/shuijing/Downloads/' + shuzu[i][1] + '.xls')
         break
 
