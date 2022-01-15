@@ -18,11 +18,11 @@ from time import sleep
 from selenium import webdriver
 from PIL import Image
 import pytesseract
-
+from 图片降噪处理and验证码识别.验证码识别 import chuli
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 
-wd = webdriver.Edge('/web自动化_教务系统/Edge驱动/msedgedriver')
+wd = webdriver.Edge('Edge驱动/msedgedriver')
 # # VPN的登录
 wd.get('https://webvpn.guit.edu.cn/users/sign_in')  # VPN网址进入
 username = wd.find_element(By.CSS_SELECTOR, '#user_login')  # 定位了这个用户名文本框 (通过css选择器)
@@ -55,13 +55,17 @@ for i in range(39):
             top = ce.location['y']
             right = ce.size['width'] + left
             height = ce.size['height'] + top
-            wd.save_screenshot('picture.png')
+            wd.save_screenshot('图片降噪处理and验证码识别/处理中的照片/屏幕截图.png')
             time.sleep(2)
-            im = Image.open('picture.png')
+            im = Image.open('图片降噪处理and验证码识别/处理中的照片/屏幕截图.png')
             img = im.crop((left, top, right, height))
-            img.save('picture2.png')  # 这里就是截取到的验证码图片
+            img.save('图片降噪处理and验证码识别/处理中的照片/原始验证码.png')  # 这里就是截取到的验证码图片
 
-            image1 = cv2.imread('../【辣鱼编程】_验证码_学习资料/captcha2text/data/input/picture2.png')
+            #----------------------------图片降噪黑白化处理-------------
+            chuli()
+
+            #----------------------------处理后的图片识别=-------------------
+            image1 = cv2.imread('图片降噪处理and验证码识别/处理中的照片/完全处理后图片')
             text = pytesseract.image_to_string(image1, config='--psm 7')  # 识别验证码
             text = re.findall(r"\d", text)  # 用正则表达式进行提纯数字
             xx = ''

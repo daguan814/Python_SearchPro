@@ -15,29 +15,53 @@ from PIL import Image
 import os
 import scipy.signal as signal
 
+
+def chuli():
 #------------把照片变成个黑白再简单处理一下--------------------
+    input_images = np.zeros((300, 300))
+    filename = "处理中的照片/原始验证码.png"
+    img = Image.open(filename).resize((300, 300)).convert('L')
+    width = img.size[0]
+    height = img.size[1]
 
-input_images = np.zeros((300, 300))
-filename = "../【辣鱼编程】_验证码_学习资料/captcha2text/data/input/266.png"
-img = Image.open(filename).resize((300, 300)).convert('L')
-width = img.size[0]
-height = img.size[1]
+    for h in range(0, height):
+        for w in range(0, width):
+            if img.getpixel((h, w)) < 128:
+                input_images[w, h] = 0
+            else:
+                input_images[w, h] = 1
+    # cv2.imshow("test1111", input_images)
+    cv2.imwrite('处理中的照片/黑白验证码.png', input_images * 255)
 
-for h in range(0, height):
-    for w in range(0, width):
-        if img.getpixel((h, w)) < 128:
-            input_images[w, h] = 0
-        else:
-            input_images[w, h] = 1
-# cv2.imshow("test1111", input_images)
-cv2.imwrite('xx.png', input_images * 255)
+    #------------------降噪------------------
 
-#------------------降噪------------------
+    img = Image.open(os.path.join("处理中的照片/黑白验证码.png"))
+    img_data = np.array(img, dtype=np.uint8)
+    row, col = img_data.shape
+    for i in range(row):
+        for j in range(col):
+            count = 0
+            if img_data[i, j] != 255:  # 255 white
+                # up search
+                up_i = i - 1
+                while up_i - 1 >= 0 and img_data[up_i, j] != 255:
+                    count += 1
+                    up_i -= 1
+                # down search
+                down_i = i + 1
+                while down_i + 1 <= row - 1 and img_data[down_i, j] != 255:
+                    count += 1
+                    down_i += 1
+                # clean
+                if count <= 15:
+                    for tmp_i in range(up_i, down_i):
+                        img_data[tmp_i, j] = 255
+    img_reduce_noise = Image.fromarray(img_data.astype('uint8'))
 
-
-
-
-
+    #------------------图片调整大小------------------
+    out = img_reduce_noise.resize((60, 27), Image.ANTIALIAS)
+    # resize image with high-quality
+    out.save('处理中照片/完全处理后图片.png', 'png')
 
 
 

@@ -116,3 +116,19 @@ def dfs(img_data, i, j, visited):
         dfs(img_data, i-1, j, visited)
     if i + 1 <= row - 1 and img_data[i+1, j] == 0 and (i+1, j) not in visited:
         dfs(img_data, i+1, j, visited)
+
+
+#图片缩小 按照像素变小变大
+
+def ResizeImage(filein, fileout, width, height, type):
+  img = Image.open(filein)
+  out = img.resize((width, height),Image.ANTIALIAS)
+  #resize image with high-quality
+  out.save(fileout, type)
+if __name__ == "__main__":
+  filein = r'xx1.png'
+  fileout = r'ddv.png'
+  width = 60
+  height = 27
+  type = 'png'
+  ResizeImage(filein, fileout, width, height, type)
