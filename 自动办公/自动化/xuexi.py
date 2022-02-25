@@ -4,11 +4,8 @@
 # @File : change.py
 # @function :
 import time
-from time import sleep
 
-import keyboard
 import pyautogui
-from pyautogui import click
 
 
 def mouseClick(clickTimes, lOrR, img):
@@ -23,34 +20,39 @@ def mouseClick(clickTimes, lOrR, img):
         time.sleep(1)
 
 
-time.sleep(2)
-mouseClick(1, 'left', 'img\\1.png')  #
-time.sleep(0.3)
+i = int(input('请输入次数：'))
+for xxxx in range(i):
+    time.sleep(2)
+    mouseClick(1, 'left', 'img/1.png')  #
+    time.sleep(0.3)
 
-mouseClick(1, 'left', 'img\\2.png')  #
-
-time.sleep(4)
-
-pyautogui.click(1700, 108, button='left')
-
-pyautogui.press('pagedown')
-
-time.sleep(6)
-
-mouseClick(1, 'left', 'img\\4.png')  #
-
-pyautogui.click(1137, 70, button='left')
-
-time.sleep(1)
-
-pyautogui.typewrite(message='www.xuexi.cn', interval=0.2)
-time.sleep(1)
-pyautogui.press('enter')
-time.sleep(0.6)
-pyautogui.press('enter')
-
-
-time.sleep(4)
-mouseClick(1, 'left', 'img\\xuexi.png')  #
+    time.sleep(2)
+    mouseClick(1, 'left', 'img/2.png')  #
+    time.sleep(0.3)
+#
+# mouseClick(1, 'left', 'img\\2.png')  #
+#
+# time.sleep(4)
+#
+# pyautogui.click(1700, 108, button='left')
+#
+# pyautogui.press('pagedown')
+#
+# time.sleep(6)
+#
+# mouseClick(1, 'left', 'img\\4.png')  #
+#
+# pyautogui.click(1137, 70, button='left')
+#
+# time.sleep(1)
+#
+# pyautogui.typewrite(message='www.xuexi.cn', interval=0.2)
+# time.sleep(1)
+# pyautogui.press('enter')
+# time.sleep(0.6)
+# pyautogui.press('enter')
+#
+# time.sleep(4)
+# mouseClick(1, 'left', 'img\\2.png')  #
 
 exit(0)
