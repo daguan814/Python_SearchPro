@@ -20,15 +20,16 @@ def mouseClick(clickTimes, lOrR, img):
         time.sleep(1)
 
 
-i = int(input('请输入次数：'))
+imgg = input('请输入您的电脑用户名：')
+i = int(input('请输入循环次数：'))
 for xxxx in range(i):
     time.sleep(2)
-    mouseClick(1, 'left', 'img/1.png')  #
-    time.sleep(0.3)
+    mouseClick(1, 'left', '/Users/'+imgg+'/Desktop/img/1.png')  #
 
-    time.sleep(2)
-    mouseClick(1, 'left', 'img/2.png')  #
-    time.sleep(0.3)
+
+    time.sleep(1)
+    mouseClick(1, 'left',  '/Users/'+imgg+'/Desktop/img/2.png')  #
+
 #
 # mouseClick(1, 'left', 'img\\2.png')  #
 #
