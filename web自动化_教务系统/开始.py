@@ -23,7 +23,9 @@ from 图片降噪处理and验证码识别.验证码前置处理 import chuli
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 
-wd = webdriver.Edge('Edge驱动/msedgedriver')
+
+wd = webdriver.Edge('Edge驱动/msedgedriver') #要把edge放到主内存的应用程序里面才可以使用网页自动化
+
 # # VPN的登录
 wd.get('https://webvpn.guit.edu.cn/users/sign_in')  # VPN网址进入
 username = wd.find_element(By.CSS_SELECTOR, '#user_login')  # 定位了这个用户名文本框 (通过css选择器)
