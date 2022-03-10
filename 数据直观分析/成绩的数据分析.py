@@ -5,6 +5,7 @@
 import matplotlib.pyplot as plt
 import xlrd
 
+#进行前先要把这些文档合并一下
 workbook = xlrd.open_workbook('/Users/shuijing/Downloads/20171016.xls')  # 硬盘读取
 # 通过索引获取sheet句柄(没有名称的用这个，一般我就一个sheet)
 sheet = workbook.sheet_by_index(0)
@@ -22,9 +23,9 @@ col_fenshu = sheet.col_values(4)  # 科目分数   要先用Excel将数据用数
 
 setx = set(col_name)  # 把列表转换成集合，以把所有的数据都去重 ，集合无法使用下标
 listname = list(setx)  # 把集合再转换成列表 这里是科目名称的集合
-listnum = [0 for x in range(0, 36)]  # 创建一个长度为指定科目大小的列表 用来存储人数  26：多少个科目
+listnum = [0 for x in range(0, 26)]  # 创建一个长度为指定科目大小的列表 用来存储人数  26：多少个科目
 
-for i in range(0, 334):    #这里填行数 如：80
+for i in range(0, 372):    #这里填行数 如：80
     if not isinstance(col_fenshu[i], float):  # 剔除不是float类型的汉字
         continue
     if col_fenshu[i] < 60:

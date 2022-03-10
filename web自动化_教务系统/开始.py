@@ -2,29 +2,21 @@
 # @Author ： 水镜
 # @Do     : 使用selenium 进行web自动化
 
+import os
+import re
 import time
 
-import numpy as np
+import cv2
 import pymysql
 import pytesseract
-import os
-import cv2
+from PIL import Image
 from selenium import webdriver
 from selenium.webdriver.common.by import By
-from selenium.webdriver.remote.webelement import WebElement
 
-from 数据库操作and文件重命名 import MySQLdb
-import re
-from time import sleep
-from selenium import webdriver
-from PIL import Image
-import pytesseract
 from 图片降噪处理and验证码识别.验证码前置处理 import chuli
-from selenium import webdriver
-from selenium.webdriver.chrome.service import Service
+from 数据库操作and文件重命名 import MySQLdb
 
-
-wd = webdriver.Edge('Edge驱动/msedgedriver') #要把edge放到主内存的应用程序里面才可以使用网页自动化
+wd = webdriver.Edge('Edge驱动/msedgedriver')  # 要把edge放到主内存的应用程序里面才可以使用网页自动化 222 也可能要把驱动加入环境变量
 
 # # VPN的登录
 wd.get('https://webvpn.guit.edu.cn/users/sign_in')  # VPN网址进入
@@ -35,7 +27,7 @@ userpassword.send_keys('lhf08146613')
 denglu = wd.find_element(By.CSS_SELECTOR, '#login-form > div.col-md-6.col-md-offset-6.login-btn > input').click()
 
 shuzu = MySQLdb.dbre()  # 从数据库读取学号和姓名
-for i in range(39):
+for i in range(100):
     x = 5
     while x >= 1:  # 控制给5次机会识别
         # 教务系统 --只有先通过vpn登录后才能进入教务
@@ -64,10 +56,10 @@ for i in range(39):
             img = im.crop((left, top, right, height))
             img.save('图片降噪处理and验证码识别/处理中的照片/原始验证码.png')  # 这里就是截取到的验证码图片
 
-            #----------------------------图片降噪黑白化处理-------------
+            # ----------------------------图片降噪黑白化处理-------------
             chuli()
 
-            #----------------------------处理后的图片识别=-------------------
+            # ----------------------------处理后的图片识别=-------------------
             image1 = cv2.imread('图片降噪处理and验证码识别/处理中的照片/完全处理后图片.png')
             text = pytesseract.image_to_string(image1, config='--psm 7')  # 识别验证码
             text = re.findall(r"\d", text)  # 用正则表达式进行提纯数字
@@ -130,8 +122,23 @@ for i in range(39):
         wd.switch_to.frame(wd.find_element(
             By.CSS_SELECTOR, '#centerTabs > div.tabs-panels.tabs-panels-noborder > div:nth-child(2) > div > iframe'))
 
+        # 选择学期
+        genghuanxueqi = wd.find_element(By.CSS_SELECTOR,
+                                        '#searchForm > table > tbody > tr > td:nth-child(1) > span > input.textbox-text.validatebox-text')
+        genghuanxueqi.clear()
+        genghuanxueqi.send_keys('2021-2022学年上学期')
+
+        time.sleep(1)
+        chaxunchengji = wd.find_element(By.CSS_SELECTOR,  # 点击查询成绩按钮
+                                        '#searchForm > table > tbody > tr > td:nth-child(3) > a:nth-child(1)')
+        chaxunchengji.click()
+
+        time.sleep(1)
+
+
         daochu = wd.find_element(By.CSS_SELECTOR,  # 点击导出按钮
                                  '#searchForm > table > tbody > tr > td:nth-child(3) > a:nth-child(2)')
+
         daochu.click()
         # 将文件用学生的姓名来命名
         time.sleep(1.5)
