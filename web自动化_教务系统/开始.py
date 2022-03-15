@@ -19,7 +19,7 @@ from 数据库操作and文件重命名 import MySQLdb
 wd = webdriver.Edge('Edge驱动/msedgedriver')  # 要把edge放到主内存的应用程序里面才可以使用网页自动化 222 也可能要把驱动加入环境变量
 
 # # VPN的登录
-wd.get('https://webvpn.guit.edu.cn/users/sign_in')  # VPN网址进入
+wd.get('https://webvpn.guit.edu.cn/')  # VPN网址进入
 username = wd.find_element(By.CSS_SELECTOR, '#user_login')  # 定位了这个用户名文本框 (通过css选择器)
 username.send_keys('1951300311')
 userpassword = wd.find_element(By.CSS_SELECTOR, '#user_password')  # 定位了这个密码文本框 (通过css选择器)
@@ -33,9 +33,9 @@ for i in range(100):
         # 教务系统 --只有先通过vpn登录后才能进入教务
         wd.get('https://172-16-18-133.webvpn.guit.edu.cn/')  # 教务系统网址进入
         zhanghao = wd.find_element(By.CSS_SELECTOR,
-                                   '#loginInputForm > div.parent > div.child > table > tbody > tr:nth-child(1) > td:nth-child(3) > input')
+                                   '#loginInputForm > div > table > tbody > tr:nth-child(1) > td > input')
         mima = wd.find_element(By.CSS_SELECTOR,
-                               '#loginInputForm > div.parent > div.child > table > tbody > tr:nth-child(2) > td:nth-child(3) > input')
+                               '#loginInputForm > div > table > tbody > tr:nth-child(2) > td > input')
 
         # 把账号密码填入进去
         zhanghao.send_keys(shuzu[i][0])
@@ -73,15 +73,18 @@ for i in range(100):
 
         # 将验证码填入进去
         yanzhengma = wd.find_element(By.CSS_SELECTOR,
-                                     '#loginInputForm > div.parent > div.child > table > tbody > tr:nth-child(3) > td:nth-child(3) > input')
+                                     '#loginInputForm > div > table > tbody > tr:nth-child(3) > td:nth-child(2) > input')
         yanzhengma.send_keys(xx)
         denglu = wd.find_element(By.CSS_SELECTOR, '#Button1').click()
         time.sleep(1)
 
         # ----------------------------------------------
         try:  # 登录成功判断
-            chaxun = wd.find_element(By.CSS_SELECTOR,
-                                     '#_easyui_tree_11 > span.tree-title').click()
+            jinruxuanxiang = wd.find_element(By.CSS_SELECTOR,  #进入页面后点击下拉菜单 ，如果没成功就进行处理成绩操作
+                                     '#app > section > i > section > aside > ul > li > div').click()
+            time.sleep(1)
+            chengjichaxun = wd.find_element(By.CSS_SELECTOR,  # 进入页面后点击下拉菜单 ，如果没成功就进行处理成绩操作
+                                     '#app > section > i > section > aside > ul > li > ul > li:nth-child(8)').click()
 
         except:
             tishi = wd.find_element(By.CSS_SELECTOR,
@@ -120,7 +123,7 @@ for i in range(100):
         # 先进入iframe框架
         # 先定位到iframe
         wd.switch_to.frame(wd.find_element(
-            By.CSS_SELECTOR, '#centerTabs > div.tabs-panels.tabs-panels-noborder > div:nth-child(2) > div > iframe'))
+            By.CSS_SELECTOR, '#ifram06\.10'))
 
         # 选择学期
         genghuanxueqi = wd.find_element(By.CSS_SELECTOR,
