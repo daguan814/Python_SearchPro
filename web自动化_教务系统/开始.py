@@ -18,13 +18,13 @@ from 数据库操作and文件重命名 import MySQLdb
 
 wd = webdriver.Edge('Edge驱动/msedgedriver')  # 要把edge放到主内存的应用程序里面才可以使用网页自动化 222 也可能要把驱动加入环境变量
 
-# # VPN的登录
-wd.get('https://webvpn.guit.edu.cn/')  # VPN网址进入
-username = wd.find_element(By.CSS_SELECTOR, '#user_login')  # 定位了这个用户名文本框 (通过css选择器)
-username.send_keys('1951300311')
-userpassword = wd.find_element(By.CSS_SELECTOR, '#user_password')  # 定位了这个密码文本框 (通过css选择器)
-userpassword.send_keys('lhf08146613')
-denglu = wd.find_element(By.CSS_SELECTOR, '#login-form > div.col-md-6.col-md-offset-6.login-btn > input').click()
+# # # VPN的登录
+# wd.get('https://webvpn.guit.edu.cn/')  # VPN网址进入
+# username = wd.find_element(By.CSS_SELECTOR, '#user_login')  # 定位了这个用户名文本框 (通过css选择器)
+# username.send_keys('1951300311')
+# userpassword = wd.find_element(By.CSS_SELECTOR, '#user_password')  # 定位了这个密码文本框 (通过css选择器)
+# userpassword.send_keys('lhf08146613')
+# denglu = wd.find_element(By.CSS_SELECTOR, '#login-form > div.col-md-6.col-md-offset-6.login-btn > input').click()
 
 shuzu = MySQLdb.dbre()  # 从数据库读取学号和姓名
 for i in range(100):
