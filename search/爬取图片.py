@@ -74,7 +74,7 @@ class downpict():
                 print('错误，当前图片无法下载')
                 continue
             else:
-                string = self.file + r'\\' + keyword + '_' + str(self.num) + '.jpg'
+                string = self.file + r'/' + keyword + '_' + str(self.num) + '.jpg'
                 fp = open(string, 'wb')
                 fp.write(pic.content)
                 fp.close()
