@@ -31,7 +31,10 @@ for i in range(100):
     x = 5
     while x >= 1:  # 控制给5次机会识别
         # 教务系统 --只有先通过vpn登录后才能进入教务
-        wd.get('https://172-16-18-133.webvpn.guit.edu.cn/')  # 教务系统网址进入
+        #wd.get('https://172-16-18-133.webvpn.guit.edu.cn/')  # 教务系统网址进入
+
+        wd.get('http://172.16.18.133')  # 教务系统网址进入
+
         zhanghao = wd.find_element(By.CSS_SELECTOR,
                                    '#loginInputForm > div > table > tbody > tr:nth-child(1) > td > input')
         mima = wd.find_element(By.CSS_SELECTOR,
